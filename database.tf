@@ -2,7 +2,7 @@
 
 resource "aws_db_subnet_group" "database-subnet" {
   name       = "database-subnets"
-  subnet_ids = [aws_subnet.private-db-subnet-1.id, aws_subnet.private-db-subnet-2.id]
+  subnet_ids = [aws_ssm_parameter.Private-DB-1.value, aws_ssm_parameter.Private-DB-2.value]
 
   tags = {
     Name = "My DB subnet group"

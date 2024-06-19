@@ -4,7 +4,7 @@ resource "aws_eip" "eip-nat" {
 
 resource "aws_nat_gateway" "nat-gw" {
   allocation_id = aws_eip.eip-nat.id
-  subnet_id     = aws_subnet.pub-sn-2.id
+  subnet_id     = aws_ssm_parameter.pub-sn-2.value
 
   tags = {
     Name = "Nat GW"

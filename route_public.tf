@@ -1,5 +1,5 @@
 resource "aws_route_table" "public-route" {
-  vpc_id = aws_vpc.vpc-01.id
+  vpc_id = aws_ssm_parameter.vpc-id.value
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -12,11 +12,11 @@ resource "aws_route_table" "public-route" {
 }
 
 resource "aws_route_table_association" "a" {
-  subnet_id      = aws_subnet.pub-sn-1.id
+  subnet_id      = aws_ssm_parameter.pub-sn-1.value
   route_table_id = aws_route_table.public-route.id
 }
 
 resource "aws_route_table_association" "b" {
-  subnet_id      = aws_subnet.pub-sn-2.id
+  subnet_id      = aws_ssm_parameter.pub-sn-2.value
   route_table_id = aws_route_table.public-route.id
 }

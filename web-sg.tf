@@ -1,7 +1,7 @@
 resource "aws_security_group" "Webserver_security_group" {
   name        = "Web Server Security Group"
   description = "Enable HTTP/HTTPS ports"
-  vpc_id      = aws_vpc.vpc-01.id
+  vpc_id      = aws_ssm_parameter.vpc-id.value
 
   ingress {
     from_port = 80

@@ -1,5 +1,5 @@
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.vpc-01.id
+  vpc_id = aws_ssm_parameter.vpc-id.value
 
   tags = {
     Name = "My-IGW"

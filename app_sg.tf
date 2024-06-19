@@ -1,7 +1,7 @@
 resource "aws_security_group" "ssh_security_group" {
   name        = "SSH Access"
   description = "Enable SSH on port 22"
-  vpc_id      = aws_vpc.vpc-01.id
+  vpc_id      = aws_ssm_parameter.vpc-id.value
 
   ingress {
     from_port   = 22

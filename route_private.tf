@@ -1,5 +1,5 @@
 resource "aws_route_table" "private-route" {
-  vpc_id = aws_vpc.vpc-01.id
+  vpc_id = aws_ssm_parameter.vpc-id.value
 
   route {
     cidr_block     = "0.0.0.0/0"
@@ -14,12 +14,12 @@ resource "aws_route_table" "private-route" {
 # Route the private subnet to the nat gateway 
 
 resource "aws_route_table_association" "nat_route_1" {
-  subnet_id      = aws_subnet.pri-sn-1.id
+  subnet_id      = aws_ssm_parameter.pri-sn-1.value
   route_table_id = aws_route_table.private-route.id
 }
 
 resource "aws_route_table_association" "nat_route_2" {
-  subnet_id      = aws_subnet.pri-sn-2.id
+  subnet_id      = aws_ssm_parameter.pri-sn-2.value
   route_table_id = aws_route_table.private-route.id
 }
 
