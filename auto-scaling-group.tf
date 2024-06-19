@@ -1,7 +1,7 @@
 resource "aws_launch_template" "auto-scaling-group" {
   name_prefix   = "auto-scaling-group"
-  image_id      = "ami-0705384c0b33c194c"
-  instance_type = "t3.micro"
+  image_id      = var.ami
+  instance_type = var.instance_type
   key_name      = "linux_machine"
   user_data = filebase64("install_nginx.sh")
   network_interfaces {

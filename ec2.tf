@@ -6,7 +6,7 @@ resource "aws_instance" "Public-WebTemplate" {
   key_name        = "linux_machine"
 
   tags = {
-    Name = "web-public-1"
+    Name = "${var.name}-web-public-1"
   }
 }
 

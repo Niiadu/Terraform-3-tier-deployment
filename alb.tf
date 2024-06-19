@@ -3,11 +3,11 @@ resource "aws_lb" "application-load-balancer" {
   internal                   = false
   load_balancer_type         = "application"
   security_groups            = [aws_security_group.alb_security_group.id]
-  subnets                    = [aws_subnet.pub-sn-1.id, aws_subnet.pub-sn-2.id]
+  subnets                    = [aws_ssm_parameter.pub-sn-1.value, aws_ssm_parameter.pub-sn-2.value]
   enable_deletion_protection = false
 
   tags = {
-    Name = "App Load balancer"
+    Name = var.name-var.lb
   }
 }
 

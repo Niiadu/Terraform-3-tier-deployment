@@ -37,3 +37,19 @@ variable "database-instance-class" {
 variable "multi-az-deployment" {
   default = true
 }
+
+variable "lb" {
+  default = "App Load balancer"
+}
+
+variable "ami" {
+  default = "ami-0705384c0b33c194c"
+}
+
+variable "instance_type" {
+  default = "t3.micro"
+}
+
+variable "db-pass" {
+  default = "niiadu1212database"
+}
