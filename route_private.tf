@@ -1,3 +1,4 @@
+# Private route table associated with the nat gateway.
 resource "aws_route_table" "private-route" {
   vpc_id = aws_ssm_parameter.vpc-id.value
 

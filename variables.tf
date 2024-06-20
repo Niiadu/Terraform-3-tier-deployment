@@ -42,14 +42,23 @@ variable "lb" {
   default = "App Load balancer"
 }
 
-variable "ami" {
-  default = "ami-0705384c0b33c194c"
-}
-
 variable "instance_type" {
   default = "t3.micro"
 }
 
-variable "db-pass" {
-  default = "niiadu1212database"
+
+variable "db-username" {
+  default = "admin"
+}
+
+variable "rds-username-file" {
+  default = "rds-db-password.txt"
+}
+
+variable "rds-password-file" {
+  default = "db-username.txt"
+}
+
+variable "rds-credential-file" {
+  default = "rds-credential.txt"
 }

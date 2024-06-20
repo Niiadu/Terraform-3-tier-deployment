@@ -1,3 +1,4 @@
+# Security Group for our Bastion Host, for ssh access into out instances in the private subnet
 resource "aws_security_group" "ssh_security_group" {
   name        = "SSH Access"
   description = "Enable SSH on port 22"

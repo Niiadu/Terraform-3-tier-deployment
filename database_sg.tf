@@ -1,3 +1,4 @@
+# Security Group for the database in the private DB subnet, to allow access from the EC2 instances in the private subnet
 resource "aws_security_group" "Database_security_group" {
   name        = "Database server Security Group"
   description = "Enable MYSQL access on port 3306"

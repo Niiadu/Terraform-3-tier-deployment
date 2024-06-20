@@ -1,3 +1,4 @@
+# This is a security group for the ec2 instances in the private subnet
 resource "aws_security_group" "Webserver_security_group" {
   name        = "Web Server Security Group"
   description = "Enable HTTP/HTTPS ports"
@@ -7,7 +8,6 @@ resource "aws_security_group" "Webserver_security_group" {
     from_port = 80
     to_port   = 80
     protocol  = "tcp"
-    # cidr_blocks = ["0.0.0.0/0"]
     security_groups = [aws_security_group.alb_security_group.id]
   }
 
@@ -15,7 +15,6 @@ resource "aws_security_group" "Webserver_security_group" {
     from_port = 443
     to_port   = 443
     protocol  = "tcp"
-    # cidr_blocks = ["0.0.0.0/0"]
     security_groups = [aws_security_group.alb_security_group.id]
   }
 
@@ -23,7 +22,6 @@ resource "aws_security_group" "Webserver_security_group" {
     from_port = 22
     to_port   = 22
     protocol  = "tcp"
-    # cidr_blocks = ["0.0.0.0/0"]
     security_groups = [aws_security_group.alb_security_group.id]
   }
 

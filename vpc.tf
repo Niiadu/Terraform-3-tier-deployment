@@ -1,3 +1,4 @@
+# The vpc network area where the infratructure would reside
 resource "aws_vpc" "vpc-01" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
@@ -7,6 +8,7 @@ resource "aws_vpc" "vpc-01" {
   }
 }
 
+# The first public subnet
 resource "aws_subnet" "pub-sn-1" {
   vpc_id                  = aws_ssm_parameter.vpc-id.value
   cidr_block              = var.public-subnet-01-cidr
@@ -18,6 +20,7 @@ resource "aws_subnet" "pub-sn-1" {
   }
 }
 
+# The second public subnet
 resource "aws_subnet" "pub-sn-2" {
   vpc_id                  = aws_ssm_parameter.vpc-id.value
   cidr_block              = var.public-subent-02-cidr
@@ -29,6 +32,7 @@ resource "aws_subnet" "pub-sn-2" {
   }
 }
 
+# The first private subnet
 resource "aws_subnet" "pri-sn-1" {
   vpc_id                  = aws_ssm_parameter.vpc-id.value
   cidr_block              = var.private-subent-01-cidr
@@ -40,6 +44,7 @@ resource "aws_subnet" "pri-sn-1" {
   }
 }
 
+# The second private subnet
 resource "aws_subnet" "pri-sn-2" {
   vpc_id                  = aws_ssm_parameter.vpc-id.value
   cidr_block              = var.private-subent-02-cidr
@@ -51,7 +56,7 @@ resource "aws_subnet" "pri-sn-2" {
   }
 }
 
-
+# The third private subnet but this is meant for the database
 resource "aws_subnet" "private-db-subnet-1" {
   vpc_id                  = aws_ssm_parameter.vpc-id.value
   cidr_block              = var.private-db-subnet-1-cidr
@@ -63,6 +68,7 @@ resource "aws_subnet" "private-db-subnet-1" {
   }
 }
 
+# The fourth private subnet for the database 
 resource "aws_subnet" "private-db-subnet-2" {
   vpc_id                  = aws_ssm_parameter.vpc-id.value
   cidr_block              = var.private-db-subnet-2-cidr
