@@ -13,8 +13,7 @@ Before we begin, make sure you have the following:
 ### VPC Setup
 First, we define our VPC, which is the network container for our infrastructure.
 
-hcl
-Copy code
+'''
 resource "aws_vpc" "vpc-01" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
@@ -23,6 +22,7 @@ resource "aws_vpc" "vpc-01" {
     Name = "${var.name}-Nii-VPC"
   }
 }
+'''
 Subnets
 Next, we create public and private subnets within the VPC. Public subnets will host resources that need internet access, while private subnets will host resources that should not be directly accessible from the internet.
 
