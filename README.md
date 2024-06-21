@@ -13,7 +13,7 @@ Before we begin, make sure you have the following:
 ### VPC Setup
 First, we define our VPC, which is the network container for our infrastructure.
 
-'''
+```
 resource "aws_vpc" "vpc-01" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
@@ -22,12 +22,13 @@ resource "aws_vpc" "vpc-01" {
     Name = "${var.name}-Nii-VPC"
   }
 }
-'''
-Subnets
+```
+
+## Subnets
 Next, we create public and private subnets within the VPC. Public subnets will host resources that need internet access, while private subnets will host resources that should not be directly accessible from the internet.
 
-
-'''resource "aws_subnet" "pub-sn-1" {
+```
+  resource "aws_subnet" "pub-sn-1" {
   vpc_id                  = aws_ssm_parameter.vpc-id.value
   cidr_block              = var.public_subnet_01_cidr
   availability_zone       = "eu-north-1a"
@@ -36,7 +37,8 @@ Next, we create public and private subnets within the VPC. Public subnets will h
   tags = {
     Name = "${var.name}-Public-subnet-1"
   }
-}'''
+}
+```
 
 resource "aws_subnet" "pub-sn-2" {
   vpc_id                  = aws_ssm_parameter.vpc-id.value
