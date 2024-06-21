@@ -38,7 +38,8 @@ Next, we create public and private subnets within the VPC. Public subnets will h
     Name = "${var.name}-Public-subnet-1"
   }
 }
-```
+
+
 
 resource "aws_subnet" "pub-sn-2" {
   vpc_id                  = aws_ssm_parameter.vpc-id.value
@@ -50,11 +51,13 @@ resource "aws_subnet" "pub-sn-2" {
     Name = "${var.name}-Public-subnet-2"
   }
 }
-Private Subnets
+```
+
+## Private Subnets
 Private subnets are defined similarly but do not map public IPs on launch.
 
-hcl
-Copy code
+
+```
 resource "aws_subnet" "pri-sn-1" {
   vpc_id                  = aws_ssm_parameter.vpc-id.value
   cidr_block              = var.private_subnet_01_cidr
@@ -76,11 +79,13 @@ resource "aws_subnet" "pri-sn-2" {
     Name = "${var.name}-Private-subnet-2 | App tier"
   }
 }
-Security Groups
+
+```
+
+## Security Groups
 Security groups control inbound and outbound traffic for resources. Here, we create a security group for web servers and another for the database.
 
-hcl
-Copy code
+```
 resource "aws_security_group" "Webserver_security_group" {
   name        = "Web Server Security Group"
   description = "Enable HTTP/HTTPS ports"
@@ -118,11 +123,12 @@ resource "aws_security_group" "Webserver_security_group" {
     Name = "Webserver Security Group"
   }
 }
-SSM Parameters
+```
+
+## SSM Parameters
 SSM parameters store values for VPC and subnet IDs, making it easier to reference them in other parts of the configuration.
 
-hcl
-Copy code
+```
 resource "aws_ssm_parameter" "vpc-id" {
   name = "${var.name}-vpcID"
   value = aws_vpc.vpc-01.id
@@ -136,11 +142,12 @@ resource "aws_ssm_parameter" "pub-sn-1" {
   value = aws_subnet.pub-sn-1.id
   depends_on = [ aws_subnet.pub-sn-1 ]
 }
-Internet Gateway and NAT Gateway
+```
+
+## Internet Gateway and NAT Gateway
 The Internet Gateway allows resources in public subnets to access the internet, while the NAT Gateway allows resources in private subnets to access the internet without being exposed.
 
-hcl
-Copy code
+```
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_ssm_parameter.vpc-id.value
 
@@ -161,11 +168,12 @@ resource "aws_nat_gateway" "nat-gw" {
     Name = "Nat GW"
   }
 }
-Route Tables
+```
+
+#Route Tables
 Route tables control traffic routing. We create a public route table for the public subnets and a private route table for the private subnets.
 
-hcl
-Copy code
+```
 resource "aws_route_table" "public-route" {
   vpc_id = aws_ssm_parameter.vpc-id.value
 
@@ -201,11 +209,12 @@ resource "aws_route_table_association" "nat_route_1" {
   subnet_id      = aws_ssm_parameter.pri-sn-1.value
   route_table_id = aws_route_table.private-route.id
 }
-Load Balancer and Autoscaling
+```
+
+#Load Balancer and Autoscaling
 We set up an Application Load Balancer (ALB) to distribute traffic and an autoscaling group to manage the number of EC2 instances based on demand.
 
-hcl
-Copy code
+```
 resource "aws_lb" "application-load-balancer" {
   name                       = "web-external-load-balancer"
   internal                   = false
@@ -230,11 +239,12 @@ resource "aws_autoscaling_group" "asg-1" {
     version = "$Latest"
   }
 }
-Database Setup
+```
+
+## Database Setup
 We configure an RDS instance for our MySQL database, ensuring that the database is in a private subnet for security.
 
-hcl
-Copy code
+```
 resource "aws_db_instance" "database-instance" {
   allocated_storage      = 10
   db_name                = "sqldb"
@@ -245,18 +255,34 @@ resource "aws_db_instance" "database-instance" {
   password               = local.db_credentials.password
   parameter_group_name   = "default.mysql8.0"
   skip_final_snapshot    = true
-  availability_zone      = "eu-north-1a"
+  availability_zone      = your availability zone
   db_subnet_group_name   = aws_db_subnet_group.database-subnet.name
   vpc_security_group_ids = [aws_security_group.Database_security_group.id]
 }
-Bastion Host
+
+```
+
+## Bastion Host
 A bastion host is set up for SSH access to instances in the private subnets.
 
-hcl
-Copy code
+```
 resource "aws_instance" "Public-WebTemplate" {
   ami             = data.aws_ami.ubuntu.id // Ubuntu  AMI
   instance_type   = "t3.micro"
   subnet_id       = aws_ssm_parameter.pub-sn-1.value
   security_groups = [aws_security_group.alb_security_group.id]
-  key_name        = "
+  key_name        = "YourKeyName"
+
+  tags = {
+    Name = "${var.name}-public-bastion"
+  }
+}
+```
+
+## Conclusion
+By following this guide, you can create a secure and scalable infrastructure on AWS using Terraform. This setup ensures that your resources are well-organized, secure, and capable of handling varying loads. Feel free to modify the configuration to suit your specific needs and requirements. Happy coding!
+
+# Perform
+## Terraform Init
+## Terraform Plan
+## Terraform apply
