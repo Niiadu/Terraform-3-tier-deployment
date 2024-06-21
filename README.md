@@ -1,15 +1,16 @@
-Building a Secure and Scalable Infrastructure on AWS with Terraform
-Introduction
+# Building a Secure and Scalable Infrastructure on AWS with Terraform
+## Introduction
 In this blog post, I'll walk you through the process of building a secure and scalable infrastructure on AWS using Terraform. The infrastructure setup includes a Virtual Private Cloud (VPC) with public and private subnets, security groups, an Internet Gateway, a NAT Gateway, an Application Load Balancer, and an RDS instance for a MySQL database. This guide will help you understand the components involved and how they fit together to create a robust and flexible cloud environment.
 
-Prerequisites
+## Prerequisites
 Before we begin, make sure you have the following:
 
-An AWS account with appropriate permissions to create resources.
-Terraform installed on your local machine.
-A basic understanding of AWS services and Terraform.
-Terraform Code Breakdown
-VPC Setup
+* An AWS account with appropriate permissions to create resources.
+* Terraform installed on your local machine.
+* A basic understanding of AWS services and Terraform.
+
+## Terraform Code Breakdown
+### VPC Setup
 First, we define our VPC, which is the network container for our infrastructure.
 
 hcl
@@ -25,9 +26,8 @@ resource "aws_vpc" "vpc-01" {
 Subnets
 Next, we create public and private subnets within the VPC. Public subnets will host resources that need internet access, while private subnets will host resources that should not be directly accessible from the internet.
 
-hcl
-Copy code
-resource "aws_subnet" "pub-sn-1" {
+
+'''resource "aws_subnet" "pub-sn-1" {
   vpc_id                  = aws_ssm_parameter.vpc-id.value
   cidr_block              = var.public_subnet_01_cidr
   availability_zone       = "eu-north-1a"
@@ -36,7 +36,7 @@ resource "aws_subnet" "pub-sn-1" {
   tags = {
     Name = "${var.name}-Public-subnet-1"
   }
-}
+}'''
 
 resource "aws_subnet" "pub-sn-2" {
   vpc_id                  = aws_ssm_parameter.vpc-id.value
