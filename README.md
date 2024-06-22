@@ -283,6 +283,6 @@ resource "aws_instance" "Public-WebTemplate" {
 By following this guide, you can create a secure and scalable infrastructure on AWS using Terraform. This setup ensures that your resources are well-organized, secure, and capable of handling varying loads. Feel free to modify the configuration to suit your specific needs and requirements. Happy coding!
 
 # Perform
-## Terraform Init
-## Terraform Plan
-## Terraform apply
+### Terraform Init
+### Terraform Plan
+### Terraform apply
