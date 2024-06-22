@@ -170,7 +170,7 @@ resource "aws_nat_gateway" "nat-gw" {
 }
 ```
 
-#Route Tables
+## Route Tables
 Route tables control traffic routing. We create a public route table for the public subnets and a private route table for the private subnets.
 
 ```
@@ -211,7 +211,7 @@ resource "aws_route_table_association" "nat_route_1" {
 }
 ```
 
-#Load Balancer and Autoscaling
+## Load Balancer and Autoscaling
 We set up an Application Load Balancer (ALB) to distribute traffic and an autoscaling group to manage the number of EC2 instances based on demand.
 
 ```
