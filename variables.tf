@@ -62,3 +62,11 @@ variable "rds-password-file" {
 variable "rds-credential-file" {
   default = "rds-credential.txt"
 }
+
+variable "availability-1" {
+  default = "enter your availability zone"
+}
+
+variable "availability-2" {
+  default = "enter your availability zone"
+}

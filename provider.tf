@@ -1,4 +1,4 @@
 # AWS provider
 provider "aws" {
-  region = "eu-north-1"
+  region = "enter your region"
 }
