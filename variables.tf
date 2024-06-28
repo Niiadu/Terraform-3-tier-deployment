@@ -70,3 +70,7 @@ variable "availability-1" {
 variable "availability-2" {
   default = "eu-north-1b"
 }
+
+variable "key-pair" {
+  default = "linux_machine"
+}

@@ -3,7 +3,7 @@ resource "aws_launch_template" "auto-scaling-group" {
   name_prefix   = "auto-scaling-group"
   image_id      = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
-  key_name      = "linux_machine"
+  key_name      = var.key-pair
   user_data = filebase64("${path.module}/install_nginx.sh")
   network_interfaces {
     # subnet_id       = aws_subnet.pub-sn-1.id
