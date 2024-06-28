@@ -64,9 +64,9 @@ variable "rds-credential-file" {
 }
 
 variable "availability-1" {
-  default = "enter your availability zone"
+  default = "eu-north-1a"
 }
 
 variable "availability-2" {
-  default = "enter your availability zone"
+  default = "eu-north-1b"
 }
